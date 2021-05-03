@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Main Page</title>
+	<link rel="stylesheet" href="login-page.css">
+	<script defer src="login-page.js"></script>
+</head>
+
+<body>
+<form action="" method="post"enctype="multipart/form-data">
+  <main id="main-holder">
+    
+    <style type=text/css>
+         .leftdiv
+         {
+         float: left;
+         background-color:white
+         }
+         .middlediv
+         {
+         float: left;
+         background-color:white
+         }
+         .rightdiv
+         {
+         float: left;
+         background-color:white
+         }
+         div{
+         padding : 2%;
+   
+]   color: blue;
+         background-color: 009900;
+         width: 80%;
+         border: solid black;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div class="leftdiv">
+          <div class = "row">
+         <h1>User area</h1>
+         <p>
+          <a href="{{url_for('logout')}}"> <p align="right"> Logout</p> </a>
+		  
+          <a><h2> Greetings   {{session.username}}</h2> </a>
+      </p>
+          </div>
+         
+      </div>
+
+
+
+      <div class="middlediv">
+          <div class = "row">
+         <h1>Subscription area</h1>
+         <p>
+		{% for time in subremove %}
+		 
+		 <p>Title:{{ time['title']}}</p>
+         <p>Year:{{ time['year']}}</p>
+		 <p>Artist:{{ time['artist']}}</p>
+		 {%set img_url= url ~time['artist'].title().replace(" ", "") ~ '.jpg'%}
+		 <img src ={{img_url}} width="120" height="120"></p>  
+		
+		 <form action="" method="post" enctype="multipart/form-data">
+			 <input type="hidden" id="title" name="title" value="{{ time['title'] }}" /><br><br>
+			 <input type="hidden" id="year" name="year" value="{{ time['year'] }}" /><br><br>
+			 <input type="hidden" id="artist" name="artist" value="{{ time['artist'] }}" /><br><br>
+			 <button type="submit" name="remove">Remove</button><br><br>
+         
+		 </form>
+		  {% endfor %}
+         </p>
+           </div>
+         </div>
+
+      <div class="rightdiv">
+         <div class = "row">
+		 <form action="" method="post" enctype="multipart/form-data">
+         <h1>Query area </h1>
+         <p>
+		 <form>
+		 <p>
+		  <label for="title">Title    </label><br>
+		  <input type="text" id="title" name="title"><br>
+		  <label for="year">Year:</label><br>
+		  <input type="text" id="year" name="year"><br><br>
+		  <label for="artist">Artist</label><br>
+		  <input type="text" id="artist" name="artist"><br><br>
+		  <button type="submit" name="query">Query</button><br><br>
+         </p>
+		 </form>
+		{% if fetchresult != " " %}
+		 {% for time in fetchresult %}
+		 
+		 
+		 <p>Title:{{ time['title']}}</p>
+         <p>Year:{{ time['year']}}</p>
+		 <p>Artist:{{ time['artist']}}</p>
+		 {% set img_url= url ~time['artist'].title().replace(" ", "") ~ '.jpg'%}
+		 <img src ={{img_url}} width="120" height="120"></p>  
+		
+		 <form action="" method="post" enctype="multipart/form-data">
+			 <input type="hidden" id="title" name="title" value="{{ time['title'] }}" /><br><br>
+			 <input type="hidden" id="year" name="year" value="{{ time['year'] }}" /><br><br>
+			 <input type="hidden" id="artist" name="artist" value="{{ time['artist'] }}" /><br><br>
+			 <button type="submit" name="subscribe">Subscribe</button><br><br>
+         
+		 </form>
+		  {% endfor %}
+		 {% endif %}
+		 
+		  </div>
+         </div>
+		 
+         </p>
+		 </form>
+		 
+           </div>
+         </div>
+		{% if error %}
+	<div class = "alert alert-danger" role="alert">
+	  <p>{{error}}</p>
+	</div>
+  {%endif%} 
+
+
+  
+  </main>
+</body>
+
+</html>

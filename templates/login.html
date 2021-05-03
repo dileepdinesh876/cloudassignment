@@ -1,0 +1,33 @@
+<!DOCTYPE html>	
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGIN</title>
+  <link rel="stylesheet" href="login-page.css">
+  <script defer src="login-page.js"></script>
+</head>
+
+<body>
+  <main id="main-holder">
+    <h1 style=color:blue;font-size:70px;">Login</h1>  
+    <form action="" method="post">
+	  <label for="id">Email     </label><br>
+	  <input type="text" id="id" name="id"><br>
+	  <label for="password">Password:</label><br>
+	  <input type="text" id="password" name="password"><br><br>
+	  <input type="submit" value="Login"><br><br>
+	  <a href="{{url_for('register')}}"> Register </a>
+	 
+  </form>
+  {% if error %}
+	<div class = "alert alert-danger" role="alert">
+	  <p>{{error}}</p>
+	</div>
+  {%endif%} 	
+  
+  </main>
+</body>
+
+</html>
